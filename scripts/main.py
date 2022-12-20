@@ -46,6 +46,7 @@ print("mobile_athletes: {}".format(mobile_athletes.get_attribute('class')))
 
 driver.quit()
 
+
 #athletes_collapsed = driver.find_elements(By.XPATH, '//*[@id="leaderboardSponsorVisible"]/div/div[3]/div[2]')
 #print(athletes_collapsed)
 
