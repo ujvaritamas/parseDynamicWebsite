@@ -8,6 +8,8 @@ source activate
 pip install selenium
 
 pip install -U selenium
+pip install webdriver_manager
+pip install beautifulsoup4
 
 or
 
