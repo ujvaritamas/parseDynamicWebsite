@@ -37,7 +37,33 @@ with open("test1.html") as fp:
 
 print(soup.head.title)
 
-import pdb; pdb.set_trace()
-leaderbouard = soup.find_all(class_='main-content loading')
 
-print(soup.find_all(class_='athlete-placement-stat-name'))
+leaderboard = soup.find_all(class_='main-content loading')
+
+for l in leaderboard:
+    children = l.find_all(True)
+
+for child in children:
+    value = child.get('value')
+    id = child.get('id')
+    c = child.get('class')
+
+    if c == ['first-name']:
+        first_name = child.contents[0]
+    if c == ['last-name']:
+        last_name = child.contents[0]
+    if c == ['info']:
+        info = child.contents
+    if c == ['rank']:
+        rank = child.contents
+    if c == ['judge']:
+        judge = child.contents
+        print(first_name, last_name, info, rank, judge)
+    
+
+
+   # print(type(child), value, id, c)
+
+    #print(child)
+
+#print(soup.find_all(class_='athlete-placement-stat-name'))
