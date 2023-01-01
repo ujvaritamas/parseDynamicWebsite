@@ -12,6 +12,7 @@ class Athlete():
         self.age = None
         self.weight = None
         self.height = None
+        self.position = None
         self.logger = logger_obj
 
     def log_athlete(self):
@@ -28,30 +29,49 @@ class Athlete():
     def get_weight_and_height(self):
         for info in self.info:
             #calculate height
-            m = None
-            m = re.search(r'[0-9]+ in \|', str(info))
-            if m:
-                #convert in to cm (1in = 2.54cm)
-                self.height = int(re.search("[0-9]+", str(m.group(0))).group(0)) *2.54
-            else:
-                m = re.search(r'[0-9]+ cm \|', str(info))
-                if m:
-                    self.height = int(re.search("[0-9]+", str(m.group(0))).group(0))
+            self.get_height(info)
+#            m = None
+#            m = re.search(r'[0-9]+ in \|', str(info))
+#            if m:
+#                #convert in to cm (1in = 2.54cm)
+#                self.height = int(re.search("[0-9]+", str(m.group(0))).group(0)) *2.54
+#            else:
+#                m = re.search(r'[0-9]+ cm \|', str(info))
+#                if m:
+#                    self.height = int(re.search("[0-9]+", str(m.group(0))).group(0))
 
             #calculate weight
-            m = None
-            m = re.search(r'\| [0-9]+ lb', str(info))
+            self.get_weight(info)
+#            m = None
+#            m = re.search(r'\| [0-9]+ lb', str(info))
+#            if m:
+#                #convert lb to kg (lb = 0.453592kg)
+#                self.weight = int(re.search("[0-9]+", str(m.group(0))).group(0)) *0.453592
+#            else:
+#                m = re.search(r'\| [0-9]+ kg', str(info))
+#                if m:
+#                    self.weight = int(re.search("[0-9]+", str(m.group(0))).group(0))
+
+    def get_height(self, info):
+        m = re.search(r'[0-9]+ in', str(info))
+        if m:
+            #convert in to cm (1in = 2.54cm)
+            self.height = int(re.search("[0-9]+", str(m.group(0))).group(0)) * 2.54
+        else:
+            m = re.search(r'[0-9]+ cm', str(info))
             if m:
-                #convert lb to kg (lb = 0.453592kg)
-                self.weight = int(re.search("[0-9]+", str(m.group(0))).group(0)) *0.453592
-            else:
-                m = re.search(r'\| [0-9]+ kg', str(info))
-                if m:
-                    self.weight = int(re.search("[0-9]+", str(m.group(0))).group(0))
-
-            
+                self.height = int(re.search("[0-9]+", str(m.group(0))).group(0))
 
 
+    def get_weight(self, info):
+        m = re.search(r'[0-9]+ lb', str(info))
+        if m:
+            #convert lb to kg (lb = 0.453592kg)
+            self.weight = int(re.search("[0-9]+", str(m.group(0))).group(0)) *0.453592
+        else:
+            m = re.search(r'[0-9]+ kg', str(info))
+            if m:
+                self.weight = int(re.search("[0-9]+", str(m.group(0))).group(0))
 
     def get_age(self):
         for info in self.info:
@@ -75,8 +95,6 @@ class Parser():
             html_file_path = os.path.join(self._temp_folder_path, html_file)
 
             self.parse_file(html_file_path)
-
-            
 
         self.logger.debug("html files: {}".format(files))
 
@@ -121,13 +139,8 @@ class Parser():
                 athlete.rank = rank
             if c == ['judge']:
                 judge = child.contents
-                athlete.judge = judge
-                
+                athlete.judge = judge  
 
-
-            
-
-
-p = Parser()
-p.parse_results()
-p.log_athletes()
+#p = Parser()
+#p.parse_results()
+#p.log_athletes()
