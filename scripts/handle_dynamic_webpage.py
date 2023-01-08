@@ -13,10 +13,10 @@ class CfPageHandler():
     def __init__(self):
         self._temp_folder_path = ''
         self.logger = logger.create_logger()
-        self.inp_w = [
-            {'url':"https://games.crossfit.com/leaderboard/open/2022?view=0&division=2&region=0&scaled=0&sort=0", 'dest': 'w0.html'},
-            {'url':"https://games.crossfit.com/leaderboard/open/2022?view=0&division=2&region=0&scaled=0&sort=0&page=2", 'dest': 'w1.html'}
-        ]
+#        self.inp_w = [
+#            {'url':"https://games.crossfit.com/leaderboard/open/2022?view=0&division=2&region=0&scaled=0&sort=0", 'dest': 'w0.html'},
+#            {'url':"https://games.crossfit.com/leaderboard/open/2022?view=0&division=2&region=0&scaled=0&sort=0&page=2", 'dest': 'w1.html'}
+#        ]
 
 
     def create_tmp_dir(self):
@@ -57,11 +57,11 @@ class CfPageHandler():
             self.logger.debug("html ({}) saved to {}".format(inp['url'], dest_file))
             driver.quit()
 
-    def collect_w(self):
+    def collect(self, inp_dict):
         self.create_tmp_dir()
-        self.save_htmls(a.inp_w)
+        self.save_htmls(inp_dict)
         return self.get_tmp_dir()
         #self.remove_tmp_dir()
 
-a = CfPageHandler()
-a.collect_w()
+#a = CfPageHandler()
+#a.collect()
