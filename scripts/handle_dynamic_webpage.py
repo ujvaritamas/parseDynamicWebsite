@@ -1,6 +1,6 @@
 from selenium import webdriver 
 from selenium.webdriver.chrome.service import Service as ChromeService 
-from webdriver_manager.chrome import ChromeDriverManager
+#from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import time
 import os
@@ -40,9 +40,10 @@ class CfPageHandler():
     def save_htmls(self, inps):
 
         for inp in inps:
-            driver = webdriver.Chrome(service=ChromeService( 
-                ChromeDriverManager().install())) 
-            
+            #driver = webdriver.Chrome(service=ChromeService( 
+            #    ChromeDriverManager().install())) 
+            driver = webdriver.Firefox()
+
             driver.implicitly_wait(30)
             driver.get(inp['url'])
             driver.implicitly_wait(30)
