@@ -107,8 +107,7 @@ class Parser():
         with open(html_file_path) as fp:
             soup = BeautifulSoup(fp, "html.parser")
 
-        leaderboard = soup.find_all(class_='main-content loading')
-
+        leaderboard = soup.find_all(class_='main-content')#(class_='main-content loading') #main-content loading before 2023
         for l in leaderboard:
             children = l.find_all(True)
 
